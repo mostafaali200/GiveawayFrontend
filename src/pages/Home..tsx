@@ -36,7 +36,6 @@ export default function Home() {
   const bg = "linear-gradient(135deg, #0077b6, #00b4d8, #90e0ef)";
   const statBg = useColorModeValue("rgba(255,255,255,0.25)", "rgba(255,255,255,0.15)");
 
-  // ✅ جلب الإحصائيات من السيرفر
   useEffect(() => {
     (async () => {
       try {
@@ -51,37 +50,41 @@ export default function Home() {
 
   return (
     <Flex
-      h="100vh"
-      w="100vw"
+      minH="100vh"
+      w="100%"
       bgGradient={bg}
       color="white"
+      direction={{ base: "column", md: "column", lg: "row" }}
       align="center"
       justify="center"
-      flexDir={{ base: "column", lg: "row" }}
-      gap={10}
-      px={{ base: 6, lg: 16 }}
+      gap={{ base: 8, md: 10, lg: 12 }}
+      px={{ base: 4, md: 10 }}
+      py={{ base: 8, md: 12 }}
       textAlign={{ base: "center", lg: "start" }}
+      overflowX="hidden"
     >
-      {/* ✳️ القسم الأيمن - الشروط */}
+      {/* ✅ القسم الأيمن - الشروط */}
       <VStack
         align={{ base: "center", lg: "flex-start" }}
-        gap={6}
+        gap={4}
         flex="1"
-        maxW="420px"
-        mt={-6}
+        maxW={{ base: "90%", md: "500px" }}
       >
-        <Text fontSize="lg" opacity={0.95}>
+        <Heading size="lg" mb={2} color="yellow.200">
+          🎯 خطوات الاشتراك والفوز
+        </Heading>
+        <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
           لكي تكون مؤهلًا للفوز، اتبع الخطوات التالية بعناية:
         </Text>
 
-        <VStack align="start" gap={3} fontSize="lg">
+        <VStack align={{ base: "center", lg: "start" }} gap={2} fontSize={{ base: "md", md: "lg" }}>
           <Text>✅ الاشتراك بـ 5 دنانير فقط عن طريق شراء الكوبون</Text>
           <Text>✅ متابعة صفحاتنا على وسائل التواصل الاجتماعي</Text>
           <Text>✅ كل رمز يمنحك فرصة جديدة للفوز</Text>
           <Text>🚗 السيارة الجديدة بانتظارك!</Text>
         </VStack>
 
-        <HStack gap={5} fontSize="2xl" mt={4}>
+        <HStack gap={5} fontSize={{ base: "2xl", md: "3xl" }} mt={4} justify={{ base: "center", lg: "flex-start" }}>
           <Link href="https://www.instagram.com/x.m.a.m.d/" target="_blank" _hover={{ color: "pink.300" }}>
             <InstagramFilled />
           </Link>
@@ -97,24 +100,22 @@ export default function Home() {
         </HStack>
       </VStack>
 
-      {/* ✳️ القسم الأوسط - التحقق من الرمز + الإحصائيات */}
+      {/* ✅ القسم الأوسط - التحقق من الرمز + الإحصائيات */}
       <Flex flex="1" justify="center" align="center" w="100%">
         <MotionBox
           bg="whiteAlpha.900"
           color="#003a52"
-          w={{ base: "90%", md: "400px" }}
+          w={{ base: "95%", sm: "90%", md: "400px" }}
           borderRadius="2xl"
-          boxShadow="2xl"
-          p={8}
+          boxShadow="xl"
+          p={{ base: 5, md: 8 }}
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.4 }}
         >
-          {/* ✅ عنوان */}
           <Heading size="md" textAlign="center" mb={4}>
             {!validCode ? "🔐 تحقق من الرمز" : "🧾 أكمل بياناتك"}
           </Heading>
 
-          {/* ✅ إحصائيات مصغّرة داخل نفس المربع */}
           {!validCode && stats && (
             <MotionBox
               initial={{ opacity: 0, y: -10 }}
@@ -127,7 +128,7 @@ export default function Home() {
               backdropFilter="blur(10px)"
               p={3}
               mb={5}
-              boxShadow="0 2px 10px rgba(0,0,0,0.1)"
+              boxShadow="md"
             >
               <HStack justify="space-between" spacing={3}>
                 <Stat textAlign="center">
@@ -160,7 +161,6 @@ export default function Home() {
             </MotionBox>
           )}
 
-          {/* ✅ التحقق أو التسجيل */}
           {!validCode ? (
             <CheckCouponForm onValid={setValidCode} />
           ) : (
@@ -169,14 +169,14 @@ export default function Home() {
         </MotionBox>
       </Flex>
 
-      {/* ✳️ القسم الأيسر - شراء الكوبون */}
+      {/* ✅ القسم الأيسر - شراء الكوبون */}
       <VStack
         align={{ base: "center", lg: "flex-start" }}
         bg="rgba(255,255,255,0.15)"
         borderRadius="xl"
-        p={6}
+        p={{ base: 4, md: 6 }}
         flex="1"
-        maxW="400px"
+        maxW={{ base: "95%", md: "400px" }}
         spacing={4}
         backdropFilter="blur(8px)"
         boxShadow="lg"
@@ -185,7 +185,7 @@ export default function Home() {
           💳 شراء الكوبون
         </Heading>
 
-        <Text fontSize="md" opacity={0.9}>
+        <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9}>
           يمكنك شراء كوبون الاشتراك بسهولة عبر التواصل معنا مباشرة على الرقم التالي:
         </Text>
 
@@ -209,7 +209,7 @@ export default function Home() {
           </Text>
         </HStack>
 
-        <Text fontSize="md" mt={2}>
+        <Text fontSize={{ base: "md", md: "lg" }} mt={2}>
           أو تواصل معنا عبر صفحاتنا على وسائل التواصل الاجتماعي للاستفسار عن طرق الدفع 💬
         </Text>
 
