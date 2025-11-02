@@ -60,7 +60,7 @@ export default function RegisterForm({ couponCode }: { couponCode: string }) {
 
     try {
       setLoading(true);
-        await api.post("/participants/register", {
+        await api.post("/api/participants/register", {
         couponCode,
         fullName: form.fullName,
         phone: form.phone,
