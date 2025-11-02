@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home."; // ✅ بدون النقطة
-import Success from "./pages/Success."; // ✅ بدون النقطة
+import Home from "./pages/Home"; // ✅ بدون النقطة
+import Success from "./pages/Success"; // ✅ بدون النقطة
 import StatsBar from "./components/StatsBar";
 
 const { Header, Content, Footer } = Layout;
