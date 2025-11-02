@@ -49,73 +49,65 @@ export default function Home() {
   }, []);
 
   return (
-    <Flex
-      minH="100vh"
-      w="100%"
-      bgGradient={bg}
-      color="white"
-      direction={{ base: "column", md: "column", lg: "row" }}
-      align="center"
-      justify="center"
-      gap={{ base: 8, md: 10, lg: 12 }}
-      px={{ base: 4, md: 10 }}
-      py={{ base: 8, md: 12 }}
-      textAlign={{ base: "center", lg: "start" }}
-      overflowX="hidden"
-    >
-      {/* ✅ القسم الأيمن - الشروط */}
-      <VStack
-        align={{ base: "center", lg: "flex-start" }}
-        gap={4}
-        flex="1"
-        maxW={{ base: "90%", md: "500px" }}
-      >
-        <Heading size="lg" mb={2} color="yellow.200">
-          🎯 خطوات الاشتراك والفوز
-        </Heading>
-        <Text fontSize={{ base: "md", md: "lg" }} opacity={0.95}>
-          لكي تكون مؤهلًا للفوز، اتبع الخطوات التالية بعناية:
-        </Text>
-
-        <VStack align={{ base: "center", lg: "start" }} gap={2} fontSize={{ base: "md", md: "lg" }}>
-          <Text>✅ الاشتراك بـ 5 دنانير فقط عن طريق شراء الكوبون</Text>
-          <Text>✅ متابعة صفحاتنا على وسائل التواصل الاجتماعي</Text>
-          <Text>✅ كل رمز يمنحك فرصة جديدة للفوز</Text>
-          <Text>🚗 السيارة الجديدة بانتظارك!</Text>
+    <Box bgGradient={bg} minH="100vh" py={8} px={4} color="white">
+      <VStack spacing={10} align="center" justify="center" w="100%" maxW="1200px" mx="auto">
+        {/* ✅ الشروط */}
+        <VStack
+          align="center"
+          spacing={3}
+          bg="rgba(255,255,255,0.1)"
+          p={6}
+          rounded="2xl"
+          shadow="md"
+          w="100%"
+          maxW={{ base: "95%", md: "600px" }}
+          textAlign="center"
+        >
+          <Heading size="lg" color="yellow.200">
+            🎯 خطوات الاشتراك والفوز
+          </Heading>
+          <Text fontSize="md" opacity={0.9}>
+            لكي تكون مؤهلًا للفوز، اتبع الخطوات التالية بعناية:
+          </Text>
+          <VStack spacing={2} fontSize="md">
+            <Text>✅ الاشتراك بـ 5 دنانير فقط عن طريق شراء الكوبون</Text>
+            <Text>✅ متابعة صفحاتنا على وسائل التواصل الاجتماعي</Text>
+            <Text>✅ كل رمز يمنحك فرصة جديدة للفوز</Text>
+            <Text>🚗 السيارة الجديدة بانتظارك!</Text>
+          </VStack>
+          <HStack spacing={6} fontSize="2xl" mt={3}>
+            <Link href="https://www.instagram.com/x.m.a.m.d/" target="_blank" _hover={{ color: "pink.300" }}>
+              <InstagramFilled />
+            </Link>
+            <Link href="https://web.facebook.com/mostafa.ali.securit.2002" target="_blank" _hover={{ color: "blue.300" }}>
+              <FacebookFilled />
+            </Link>
+            <Link href="https://www.youtube.com/@MostafaDragmeh" target="_blank" _hover={{ color: "red.400" }}>
+              <YoutubeFilled />
+            </Link>
+            <Link href="https://wa.me/962789461710" target="_blank" _hover={{ color: "green.400" }}>
+              <WhatsAppOutlined />
+            </Link>
+          </HStack>
         </VStack>
 
-        <HStack gap={5} fontSize={{ base: "2xl", md: "3xl" }} mt={4} justify={{ base: "center", lg: "flex-start" }}>
-          <Link href="https://www.instagram.com/x.m.a.m.d/" target="_blank" _hover={{ color: "pink.300" }}>
-            <InstagramFilled />
-          </Link>
-          <Link href="https://web.facebook.com/mostafa.ali.securit.2002" target="_blank" _hover={{ color: "blue.300" }}>
-            <FacebookFilled />
-          </Link>
-          <Link href="https://www.youtube.com/@MostafaDragmeh" target="_blank" _hover={{ color: "red.400" }}>
-            <YoutubeFilled />
-          </Link>
-          <Link href="https://wa.me/962789461710" target="_blank" _hover={{ color: "green.400" }}>
-            <WhatsAppOutlined />
-          </Link>
-        </HStack>
-      </VStack>
-
-      {/* ✅ القسم الأوسط - التحقق من الرمز + الإحصائيات */}
-      <Flex flex="1" justify="center" align="center" w="100%">
+        {/* ✅ مربع التحقق / التسجيل */}
         <MotionBox
           bg="whiteAlpha.900"
           color="#003a52"
-          w={{ base: "95%", sm: "90%", md: "400px" }}
+          w="100%"
+          maxW={{ base: "95%", md: "450px" }}
           borderRadius="2xl"
-          boxShadow="xl"
-          p={{ base: 5, md: 8 }}
-          whileHover={{ scale: 1.03 }}
+          boxShadow="2xl"
+          p={6}
+          whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.4 }}
         >
           <Heading size="md" textAlign="center" mb={4}>
             {!validCode ? "🔐 تحقق من الرمز" : "🧾 أكمل بياناتك"}
           </Heading>
 
+          {/* ✅ الإحصائيات */}
           {!validCode && stats && (
             <MotionBox
               initial={{ opacity: 0, y: -10 }}
@@ -130,31 +122,29 @@ export default function Home() {
               mb={5}
               boxShadow="md"
             >
-              <HStack justify="space-between" spacing={3}>
+              <HStack justify="space-around" spacing={2}>
                 <Stat textAlign="center">
                   <StatLabel fontSize="sm" color="gray.700">
                     الإجمالي
                   </StatLabel>
                   <StatNumber fontSize="lg" fontWeight="bold" color="blue.600">
-                    {Math.floor(stats.totalCoupons ?? 0)}
+                    {stats.totalCoupons ?? 0}
                   </StatNumber>
                 </Stat>
-
                 <Stat textAlign="center">
                   <StatLabel fontSize="sm" color="gray.700">
                     المستخدم
                   </StatLabel>
                   <StatNumber fontSize="lg" fontWeight="bold" color="red.500">
-                    {Math.floor(stats.usedCoupons ?? 0)}
+                    {stats.usedCoupons ?? 0}
                   </StatNumber>
                 </Stat>
-
                 <Stat textAlign="center">
                   <StatLabel fontSize="sm" color="gray.700">
                     المشاركين
                   </StatLabel>
                   <StatNumber fontSize="lg" fontWeight="bold" color="green.500">
-                    {Math.floor(stats.participants ?? 0)}
+                    {stats.participants ?? 0}
                   </StatNumber>
                 </Stat>
               </HStack>
@@ -167,64 +157,63 @@ export default function Home() {
             <RegisterForm couponCode={validCode} />
           )}
         </MotionBox>
-      </Flex>
 
-      {/* ✅ القسم الأيسر - شراء الكوبون */}
-      <VStack
-        align={{ base: "center", lg: "flex-start" }}
-        bg="rgba(255,255,255,0.15)"
-        borderRadius="xl"
-        p={{ base: 4, md: 6 }}
-        flex="1"
-        maxW={{ base: "95%", md: "400px" }}
-        spacing={4}
-        backdropFilter="blur(8px)"
-        boxShadow="lg"
-      >
-        <Heading size="lg" color="white">
-          💳 شراء الكوبون
-        </Heading>
-
-        <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9}>
-          يمكنك شراء كوبون الاشتراك بسهولة عبر التواصل معنا مباشرة على الرقم التالي:
-        </Text>
-
-        <HStack
-          as={Link}
-          href="https://wa.me/962789461710"
-          target="_blank"
-          bg="whiteAlpha.900"
-          color="#003a52"
-          p={3}
-          borderRadius="lg"
-          spacing={3}
+        {/* ✅ شراء الكوبون */}
+        <VStack
+          align="center"
+          spacing={4}
+          bg="rgba(255,255,255,0.1)"
+          borderRadius="2xl"
+          p={6}
           w="100%"
-          justify="center"
-          _hover={{ transform: "scale(1.03)", boxShadow: "lg" }}
-          transition="all 0.2s ease"
+          maxW={{ base: "95%", md: "500px" }}
+          textAlign="center"
+          shadow="md"
         >
-          <Icon as={WhatsAppOutlined} color="green.500" boxSize={6} />
-          <Text fontWeight="bold" fontSize="lg" dir="ltr">
-            +962 78 946 1710
+          <Heading size="lg" color="white">
+            💳 شراء الكوبون
+          </Heading>
+          <Text fontSize="md" opacity={0.9}>
+            يمكنك شراء كوبون الاشتراك بسهولة عبر التواصل معنا مباشرة على الرقم التالي:
           </Text>
-        </HStack>
 
-        <Text fontSize={{ base: "md", md: "lg" }} mt={2}>
-          أو تواصل معنا عبر صفحاتنا على وسائل التواصل الاجتماعي للاستفسار عن طرق الدفع 💬
-        </Text>
+          <HStack
+            as={Link}
+            href="https://wa.me/962789461710"
+            target="_blank"
+            bg="whiteAlpha.900"
+            color="#003a52"
+            p={3}
+            borderRadius="lg"
+            spacing={3}
+            w="100%"
+            justify="center"
+            _hover={{ transform: "scale(1.03)", boxShadow: "lg" }}
+            transition="all 0.2s ease"
+          >
+            <Icon as={WhatsAppOutlined} color="green.500" boxSize={6} />
+            <Text fontWeight="bold" fontSize="lg" dir="ltr">
+              +962 78 946 1710
+            </Text>
+          </HStack>
 
-        <HStack fontSize="2xl" gap={5} justify="center" mt={2}>
-          <Link href="tel:+962789461710" _hover={{ color: "yellow.300" }}>
-            <Icon as={PhoneOutlined} />
-          </Link>
-          <Link href="#" _hover={{ color: "teal.200" }}>
-            <Icon as={DollarOutlined} />
-          </Link>
-          <Link href="https://wa.me/962789461710" target="_blank" _hover={{ color: "green.400" }}>
-            <Icon as={WhatsAppOutlined} />
-          </Link>
-        </HStack>
+          <Text fontSize="md" mt={2}>
+            أو تواصل معنا عبر صفحاتنا على وسائل التواصل الاجتماعي للاستفسار عن طرق الدفع 💬
+          </Text>
+
+          <HStack fontSize="2xl" gap={5} justify="center" mt={2}>
+            <Link href="tel:+962789461710" _hover={{ color: "yellow.300" }}>
+              <Icon as={PhoneOutlined} />
+            </Link>
+            <Link href="#" _hover={{ color: "teal.200" }}>
+              <Icon as={DollarOutlined} />
+            </Link>
+            <Link href="https://wa.me/962789461710" target="_blank" _hover={{ color: "green.400" }}>
+              <Icon as={WhatsAppOutlined} />
+            </Link>
+          </HStack>
+        </VStack>
       </VStack>
-    </Flex>
+    </Box>
   );
 }
