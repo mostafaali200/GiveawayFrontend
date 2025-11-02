@@ -48,7 +48,7 @@ export default function CheckCouponForm({
 
     setLoading(true);
     try {
-      const res = await api.post("/api/coupons/check", { code });
+      const res = await api.post("/coupons/check", { code });
       const data = res.data;
 
       if (data.ok) {

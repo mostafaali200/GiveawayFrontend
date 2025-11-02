@@ -40,7 +40,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await api.get("/api/stats/summary");
+        const { data } = await api.get("/stats/summary");
         setStats(data);
         controls.start("visible");
       } catch (err) {

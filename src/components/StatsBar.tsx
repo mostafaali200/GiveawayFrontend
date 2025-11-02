@@ -27,7 +27,7 @@ export default function StatsBar() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await api.get("/api/stats/summary");
+        const { data } = await api.get("/stats/summary");
         setStats(data);
       } catch (err) {
         console.error("خطأ في جلب الإحصائيات:", err);
